@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<!-- 회원가입, 내정보 확인(정보 수정), 현재대출내역 확인, 이전대출내역 확인, -->
+<body>
+    <!-- 로그인 여부에 따라 보이는 항목이 달라짐 -->
+    <!--
+        로그인 시 : 내 정보 확인, 대출내역, 반납내역
+        로그아웃 시 : 로그인, 회원가입
+    -->
+    <ul>
+        <li><a href="loginForm.html" th:href="@{/users/login}">로그인</a></li>
+        <li><a href="joinForm.html" th:href="@{/users/join}">회원가입</a></li>
+        <li><a href="user.html" th:href="@{/users/userA}">내 정보 확인</a></li> <!-- 세션 정보 유지 어떻게? -->
+        <li><a href="borrowList.html" th:href="@{/users/userA/borrow}">대출내역</a></li>
+        <li><a href="returnList.html" th:href="@{/users/userA/return}">반납내역</a></li>
+    </ul>
+</body>
+</html>

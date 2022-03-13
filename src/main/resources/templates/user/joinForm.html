@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form action="home.html" th:action method="post">
+        <label for="userId">아이디</label>
+        <input type="text" id="userId" name="userId" required><br>
+        <label for="userLongPwd">비밀번호</label>
+        <input type="text" id="userLongPwd" name="userLongPwd" required><br>
+        <label for="userShortPwd">대출용 비밀번호</label>
+        <input type="text" id="userShortPwd" name="userShortPwd" required><br>
+        <label for="userName">이름</label>
+        <input type="text" id="userName" name="userName" required><br>
+        <label for="userTel">전화번호</label>
+        <input type="text" id="userTel" name="userTel" pattern="[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}"><br>
+        <br>
+        <button type="submit">저장</button>
+        <button onclick="location.href='home.html'" th:onclick="|location.href='@{/users}'|" type="button">
+            취소
+        </button>
+    </form>
+</body>
+</html>

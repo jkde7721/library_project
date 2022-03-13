@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h2><a href="home.html" th:href="@{/users}">Home</a></h2>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <td>도서 번호</td>
+                <td>청구 기호</td>
+                <td>도서명</td>
+                <td>저자</td>
+                <td>출판사</td>
+                <td>발행년</td>
+                <td>대출일</td>
+                <td>반납예정일</td>
+                <td>연체일수</td>
+                <!-- 연기가능 여부에 따라 버튼 활성화 -->
+                <td>연기신청</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>12345</td>
+                <td>100.김</td>
+                <td>spring boot</td>
+                <td>Ethan</td>
+                <td>인프런</td>
+                <td>2022</td>
+                <td>2022.01.01</td>
+                <td>2022.01.15</td>
+                <td>0</td>
+                <td>
+                    <button type="button">연기</button>
+                </td>
+            </tr>
+
+            <tr>
+                <td>12345</td>
+                <td>100.김c2</td>
+                <td>spring boot</td>
+                <td>Ethan</td>
+                <td>인프런</td>
+                <td>2021</td>
+                <td>2022.01.05</td>
+                <td>2022.01.19</td>
+                <td>0</td>
+                <td>
+                    <button type="button">연기</button>
+                </td>
+            </tr>
+
+            <tr>
+                <td>12345</td>
+                <td>100.김c3</td>
+                <td>spring boot</td>
+                <td>Ethan</td>
+                <td>인프런</td>
+                <td>2020</td>
+                <td>2022.02.01</td>
+                <td>2022.02.15</td>
+                <td>0</td>
+                <td>
+                    <button type="button">연기</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
