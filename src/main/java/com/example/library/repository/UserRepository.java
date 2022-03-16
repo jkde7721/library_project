@@ -7,12 +7,12 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
 public interface UserRepository {
 
     String save(User user);
-    boolean login(UserLoginDto userLoginDto);
-    User findById(String userId);
+    boolean compareByIdAndPwd(UserLoginDto userLoginDto);
+    List<User> findById(String userId);
+    List<User> findByName(String userName);
     List<User> findAll();
-    void updateUser(String userId, UserUpdateDto userUpdateDto);
+    void updateValue(String userId, UserUpdateDto userUpdateDto);
 }

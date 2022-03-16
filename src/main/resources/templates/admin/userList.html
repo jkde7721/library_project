@@ -34,28 +34,12 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>userA</td>
-                <td>김씨</td>
-                <td>010-1234-5678</td>
-                <td>2</td>
-                <td>1</td>
-            </tr>
-
-            <tr>
-                <td>userB</td>
-                <td>이씨</td>
-                <td>010-1234-1234</td>
-                <td>3</td>
-                <td>2</td>
-            </tr>
-
-            <tr>
-                <td>userC</td>
-                <td>박씨</td>
-                <td>010-5678-5678</td>
-                <td>4</td>
-                <td>3</td>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.userId}">userA</td>
+                <td th:text="${user.userName}">김씨</td>
+                <td th:text="${user.userTel}">010-1234-5678</td>
+                <td>2</td> <!-- 너는 따로 로직 추가해서 넘겨줌 -->
+                <td th:text="${user.suspenTerm}">1</td>
             </tr>
         </tbody>
     </table>

@@ -6,7 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.util.Date;
+import java.time.LocalDate;
 
 //@Entity
 @NoArgsConstructor
@@ -17,10 +17,12 @@ public class Borrow {
     private Long bookId;
     private String userId;
     private String adminId;
-    private Date borrowDay;
-    private Date expecReturnDay;
+    private LocalDate borrowDay;
+    private LocalDate expecReturnDay;
     private int overdueDay;
     private int delayTimes;
+
+    private Book book;
 
     // 생성자 내부에서 borrowDay, expecReturnDay 필드값을 초기화해야 하나?
     public Borrow(Long bookId, String userId, String adminId) {

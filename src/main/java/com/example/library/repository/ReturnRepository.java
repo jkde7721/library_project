@@ -7,5 +7,5 @@ import java.util.List;
 public interface ReturnRepository {
 
     void save(Return returnObj);
-    List<Return> findListByUserId(String userId);
+    List<Return> findById(String userId);
 }

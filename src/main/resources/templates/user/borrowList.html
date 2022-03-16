@@ -24,48 +24,20 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>12345</td>
-                <td>100.김</td>
-                <td>spring boot</td>
-                <td>Ethan</td>
-                <td>인프런</td>
-                <td>2022</td>
-                <td>2022.01.01</td>
-                <td>2022.01.15</td>
-                <td>0</td>
+            <tr th:each="borrowObj : ${borrowList}">
+                <td th:text="${borrowObj.bookId}">12345</td>
+                <th:block th:object="${borrowObj.book.bookKind}">
+                    <td th:text="*{bookSymbol}">100.김</td>
+                    <td th:text="*{bookName}">spring boot</td>
+                    <td th:text="*{bookAuthor}">Ethan</td>
+                    <td th:text="*{bookPublisher}">인프런</td>
+                    <td th:text="*{bookPubYear}">2022</td>
+                </th:block>
+                <td th:text="${borrowObj.borrowDay}">2022.01.01</td>
+                <td th:text="${borrowObj.expecReturnDay}">2022.01.15</td>
+                <td th:text="${borrowObj.overdueDay}">0</td>
                 <td>
-                    <button type="button">연기</button>
-                </td>
-            </tr>
-
-            <tr>
-                <td>12345</td>
-                <td>100.김c2</td>
-                <td>spring boot</td>
-                <td>Ethan</td>
-                <td>인프런</td>
-                <td>2021</td>
-                <td>2022.01.05</td>
-                <td>2022.01.19</td>
-                <td>0</td>
-                <td>
-                    <button type="button">연기</button>
-                </td>
-            </tr>
-
-            <tr>
-                <td>12345</td>
-                <td>100.김c3</td>
-                <td>spring boot</td>
-                <td>Ethan</td>
-                <td>인프런</td>
-                <td>2020</td>
-                <td>2022.02.01</td>
-                <td>2022.02.15</td>
-                <td>0</td>
-                <td>
-                    <button type="button">연기</button>
+                    <button th:if="${borrowObj.delayTimes == 0}" type="button" onclick="" th:onclick="">연기</button> <!-- 어디서 delayTimes의 값을 +1 하지? -->
                 </td>
             </tr>
         </tbody>

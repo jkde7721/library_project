@@ -4,14 +4,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class BorrowDto {
+public class ReturnDto {
 
-    private String userId;
     private Long bookId;
     private String adminId;
 
-    public BorrowDto(String userId, Long bookId, String adminId) {
-        this.userId = userId;
+    public ReturnDto(Long bookId, String adminId) {
         this.bookId = bookId;
         this.adminId = adminId;
     }

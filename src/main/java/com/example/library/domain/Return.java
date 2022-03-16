@@ -23,6 +23,8 @@ public class Return {
     private String userId;
     private String adminId;
 
+    private Book book;
+
     // 생성자 내부에서 returnDay, returnTime 필드값을 초기화해야 하나?
     public Return(Long bookId, String userId, String adminId) {
         this.bookId = bookId;

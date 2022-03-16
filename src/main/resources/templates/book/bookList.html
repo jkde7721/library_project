@@ -17,10 +17,12 @@
     </form>
     <br>
 
+    <!-- book 객체 내의 bookKind 필드로 도서에 대한 자세한 정보 접근 -->
     <!-- 청구기호, 도서명, 저자, 출판사, 발행년, 현재 대출가능여부 -->
     <table>
         <thead>
         <tr>
+            <td>도서번호</td>
             <td>청구기호</td>
             <td>도서명</td>
             <td>저자</td>
@@ -30,31 +32,16 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>100.김c</td>
-            <td>Spring Boot</td>
-            <td>김영한</td>
-            <td>인프런</td>
-            <td>2019</td>
-            <td>가능</td>
-        </tr>
-
-        <tr>
-            <td>100.김c2</td>
-            <td>Spring Boot</td>
-            <td>김영한</td>
-            <td>인프런</td>
-            <td>2020</td>
-            <td>불가능</td>
-        </tr>
-
-        <tr>
-            <td>100.김c3</td>
-            <td>Spring Boot</td>
-            <td>김영한</td>
-            <td>인프런</td>
-            <td>2021</td>
-            <td>불가능</td>
+        <tr th:each="book : ${books}">
+            <td th:text="${book.bookId}">1</td>
+            <td th:text="|${book.bookSymbol} c${book.bookCopy}|">100.김</td>
+            <th:block th:object="${book.bookKind}">
+                <td th:text="*{bookName}">Spring Boot</td>
+                <td th:text="*{bookAuthor}">김영한</td>
+                <td th:text="*{bookPublisher}">인프런</td>
+                <td th:text="*{bookPubYear}">2019</td>
+                <td>가능</td> <!-- 도서 대출 가능 여부 나중에... -->
+            </th:block>
         </tr>
         </tbody>
     </table>

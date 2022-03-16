@@ -8,14 +8,15 @@
     <h2><a href="home.html" th:href="@{/users}"></a></h2>
 
     <form action="user.html" th:action method="post">
+        <!-- 현재 비밀번호 확인 후, 일치하면 비밀번호 변경 -->
         <label for="userLongPwd">비밀번호</label>
-        <input type="text" id="userLongPwd" name="userLongPwd" value="abcd1234"><br>
+        <input type="text" id="userLongPwd" name="userLongPwd" value="abcd1234" th:value="${user.userLongPwd}"><br>
         <label for="userShortPwd">대출용 비밀번호</label>
-        <input type="text" id="userShortPwd" name="userShortPwd" value="1234"><br>
+        <input type="text" id="userShortPwd" name="userShortPwd" value="1234" th:value="${user.userShortPwd}"><br>
         <label for="userName">이름</label>
-        <input type="text" id="userName" name="userName" value="Ethan"><br>
+        <input type="text" id="userName" name="userName" value="Ethan" th:value="${user.userName}"><br>
         <label for="userTel">전화번호</label>
-        <input type="text" id="userTel" name="userTel" value="010-1234-5678"><br>
+        <input type="text" id="userTel" name="userTel" value="010-1234-5678" th:value="${user.userTel}"><br>
         <br>
         <button type="submit">저장</button>
         <button type="button" onclick="location.href='home.html'" th:onclick="|location.href='@{/users}'|">취소</button>

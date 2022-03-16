@@ -7,5 +7,6 @@ import java.util.List;
 public interface BorrowRepository {
 
     void save(Borrow borrowObj);
-    List<Borrow> findListByUserId(String userId);
+    List<Borrow> findById(String userId);
+    String delete(Long bookId);
 }

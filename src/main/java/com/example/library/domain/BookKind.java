@@ -1,12 +1,15 @@
 package com.example.library.domain;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 //@Entity
 @NoArgsConstructor
+@Getter @Setter
 public class BookKind {
     // 도서 등록시, (도서명, 저자, 출판사, 발행년)과 모두 일치하는 튜플이 없다면
     // 도서종류 테이블에 추가함과 동시에, 도서 테이블에도 정보 추가

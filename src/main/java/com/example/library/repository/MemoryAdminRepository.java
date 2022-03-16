@@ -1,10 +1,12 @@
 package com.example.library.repository;
 
 import com.example.library.domain.Admin;
+import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Repository
 public class MemoryAdminRepository implements AdminRepository {
 
     private static final Map<String, Admin> adminStore = new HashMap();
@@ -16,7 +18,7 @@ public class MemoryAdminRepository implements AdminRepository {
     }
 
     @Override
-    public boolean login(Admin admin) {
+    public boolean compareByIdAndPwd(Admin admin) {
         Admin findAdmin = adminStore.get(admin.getAdminId());
         return (findAdmin.getAdminPwd().equals(admin.getAdminPwd()));
     }
