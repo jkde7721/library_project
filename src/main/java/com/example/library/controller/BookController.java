@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/books")
@@ -11,13 +12,10 @@ public class BookController {
 
     // 도서 전체 조회
     @GetMapping
-    public String findBookList(Model model) {
-        return "book/bookList";
-    }
-
-    // 일단 bookName, author 파라미터가 모두 존재할 때 매핑
-    @GetMapping(params = {"bookName", "author"})
-    public String findByNameAndAuth(Model model) {
+    public String findBookList(Model model, @RequestParam(required = false) String bookName, @RequestParam(required = false) String bookAuthor) {
+        System.out.println("bookName = " + bookName);
+        System.out.println("bookAuthor = " + bookAuthor);
+        System.out.println("BookController.findBookList");
         return "book/bookList";
     }
 }

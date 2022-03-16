@@ -1,10 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+    <h2><a href="home.html" th:href="@{/users}">Home</a></h2> <!-- 이전 요청 페이지가 어떤지에 따라 고치기 -->
 
+    <form action="bookList.html" th:action method="get">
+        <label for="bookName">도서명</label>
+        <input type="text" id="bookName" name="bookName"><br>
+        <label for="bookAuthor">저자</label>
+        <input type="text" id="bookAuthor" name="bookAuthor">
+        <br>
+        <button type="submit">검색</button> <!-- 검색 요청한 폼 값 유지되어야 함 -->
+    </form>
+    <br>
+
+    <!-- 청구기호, 도서명, 저자, 출판사, 발행년, 현재 대출가능여부 -->
+    <table>
+        <thead>
+        <tr>
+            <td>청구기호</td>
+            <td>도서명</td>
+            <td>저자</td>
+            <td>출판사</td>
+            <td>발행년</td>
+            <td>대출가능여부</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>100.김c</td>
+            <td>Spring Boot</td>
+            <td>김영한</td>
+            <td>인프런</td>
+            <td>2019</td>
+            <td>가능</td>
+        </tr>
+
+        <tr>
+            <td>100.김c2</td>
+            <td>Spring Boot</td>
+            <td>김영한</td>
+            <td>인프런</td>
+            <td>2020</td>
+            <td>불가능</td>
+        </tr>
+
+        <tr>
+            <td>100.김c3</td>
+            <td>Spring Boot</td>
+            <td>김영한</td>
+            <td>인프런</td>
+            <td>2021</td>
+            <td>불가능</td>
+        </tr>
+        </tbody>
+    </table>
 </body>
 </html>

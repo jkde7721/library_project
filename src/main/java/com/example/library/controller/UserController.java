@@ -21,7 +21,6 @@ public class UserController {
 
     // 회원가입
     /**
-     * 회원가입 후, 동작 생각해보기
      * 회원가입 완료 후, 로그인 페이지로 이동(회원가입 정상완료 메시지 띄우기)
      */
     @GetMapping("/join")

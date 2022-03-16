@@ -49,50 +49,45 @@ public class AdminController {
         return "redirect:/security";
     }
 
-    // 이용자 조회 (filtering?)
+    // 이용자 조회 (filtering?) => model에 List 객체 실어나름
     @GetMapping("/users")
-    public String findUserList(Model model) {
+    public String findUserList(Model model, @RequestParam(required = false) String userId, @RequestParam(required = false) String userName) {
         // 전체 이용자 검색 로직
-        return "admin/userList";
-    }
-
-    @GetMapping(value = "/users", params = "userId")
-    public String findByUserId(@RequestParam String userId, Model model) {
-        // 한 이용자 아이디로 검색하는 로직
         System.out.println("userId = " + userId);
-        System.out.println("AdminController.findByUserId");
-        return "admin/userList";
-    }
-
-    @GetMapping(value = "/users", params = "userName")
-    public String findByUserName(@RequestParam String userName, Model model) {
-        // 한 이용자 이름으로 검색하는 로직
         System.out.println("userName = " + userName);
-        System.out.println("AdminController.findByUserName");
+        System.out.println("AdminController.findUserList");
         return "admin/userList";
     }
 
+    // 대출, 반납 처리 완료 자바스크립트 메시지 띄우기
     // 대출
     @GetMapping("/borrow")
     public String borrowForm() {
+        System.out.println("AdminController.borrowForm");
         return "admin/borrowForm";
     }
 
     @PostMapping("/borrow")
     public String processBorrow(@ModelAttribute BorrowDto borrowDto) {
         // 대출 처리 로직
+        System.out.println("borrowDto.getUserId() = " + borrowDto.getUserId());
+        System.out.println("borrowDto.getBookId() = " + borrowDto.getBookId());
+        System.out.println("AdminController.processBorrow");
         return "redirect:/security/borrow"; // 다시 대출 처리 폼으로
     }
 
     // 반납
     @GetMapping("/return")
     public String returnForm() {
+        System.out.println("AdminController.returnForm");
         return "admin/returnForm";
     }
 
     @PostMapping("/return")
     public String processReturn(@RequestParam Long bookId) {
         // 반납 처리 로직 (반납 테이블에 추가 및 대출 테이블에서 삭제)
+        System.out.println("bookId = " + bookId);
+        System.out.println("AdminController.processReturn");
         return "redirect:/security/return"; // 다시 반납 처리 폼으로
     }
 }

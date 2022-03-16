@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-    <p>Admin</p>
+    <ul>
+        <li><a href="joinForm.html" th:href="@{/security/join}">회원가입</a></li>
+        <li><a href="loginForm.html" th:href="@{/security/login}">로그인</a></li>
+        <li><a href="borrowForm.html" th:href="@{/security/borrow}">대출</a></li>
+        <li><a href="returnForm.html" th:href="@{/security/return}">반납</a></li>
+        <li><a href="userList.html" th:href="@{/security/users}">이용자 목록</a></li>
+        <li><a href="../book/bookList.html" th:href="@{/books}">도서 목록</a></li>
+    </ul>
 </body>
 </html>

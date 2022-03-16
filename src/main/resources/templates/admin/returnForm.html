@@ -1,10 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+    <h2><a href="home.html" th:href="@{/security}">Home</a></h2>
 
+    <form action="home.html" th:action method="post">
+        <label for="bookId">도서 번호</label>
+        <input type="number" id="bookId" name="bookId"><br>
+        <br>
+        <button type="submit">반납 처리</button>
+        <button type="button" onclick="location.href='home.html'" th:onclick="|location.href='@{/security}'|">취소</button>
+    </form>
 </body>
 </html>

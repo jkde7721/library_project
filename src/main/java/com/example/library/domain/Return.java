@@ -1,21 +1,23 @@
 package com.example.library.domain;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 //@Entity
 @NoArgsConstructor
+@Getter @Setter
 public class Return {
 
     @Id
+    private Long returnId; // increment
+
     private Long bookId;
-    @Id
     private LocalDate returnDay;
-    @Id
     private LocalDateTime returnTime;
 
     private String userId;

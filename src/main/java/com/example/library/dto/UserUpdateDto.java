@@ -8,13 +8,13 @@ public class UserUpdateDto {
 
     private String userLongPwd;
     private char[] userShortPwd;
-    private String userTel;
     private String userName;
+    private String userTel;
 
-    public UserUpdateDto(String userLongPwd, char[] userShortPwd, String userTel, String userName) {
+    public UserUpdateDto(String userLongPwd, char[] userShortPwd, String userName, String userTel) {
         this.userLongPwd = userLongPwd;
         this.userShortPwd = userShortPwd;
-        this.userTel = userTel;
         this.userName = userName;
+        this.userTel = userTel;
     }
 }

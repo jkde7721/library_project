@@ -1,6 +1,8 @@
 package com.example.library.domain;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,6 +11,7 @@ import javax.persistence.Id;
 
 //@Entity
 @NoArgsConstructor
+@Getter @Setter
 public class User {
 
     @Id

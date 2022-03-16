@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+    <h2><a href="home.html" th:href="@{/security}">Home</a></h2>
 
+    <form action="home.html" th:action="@{/security/login}" method="post">
+        <label for="adminId">아이디</label>
+        <input type="text" id="adminId" name="adminId"><br>
+        <label for="adminPwd">비밀번호</label>
+        <input type="text" id="adminPwd" name="adminPwd"><br>
+        <br>
+        <button type="submit">로그인</button>
+        <button type="button" onclick="location.href='home.html'" th:onclick="|location.href='@{/security}'|">취소</button>
+    </form>
 </body>
 </html>

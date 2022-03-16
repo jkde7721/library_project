@@ -1,10 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+    <h2><a href="home.html" th:href="@{/security}">Home</a></h2>
 
+    <form action="userList.html" th:action method="get" th:with="isId=true">
+        <select>
+            <option>이용자 아이디</option>
+            <option>이용자 이름</option> <!-- 안됨... 선택한 값 유지도 되어야 함 -->
+        </select>
+        <!-- 위의 선택된 값에 따라 name 속성이 userId 혹은 userName -->
+        <input th:if="${isId}" type="text" name="userId">
+        <input th:if="${!isId}" type="text" name="userName">
+
+        <br>
+        <button type="submit">검색</button>
+    </form>
+    <br>
+
+    <!-- 아이디, 이름, 전화번호, 대출 가능 권수, 대출 불가 기간 -->
+    <!-- 파라미터로 전달되는 userId 혹은 userName에 따라 데이터 검색 -->
+    <table>
+        <thead>
+            <tr>
+                <td>아이디</td>
+                <td>이름</td>
+                <td>전화번호</td>
+                <td>대출 가능 권수</td>
+                <td>대출 불가 기간</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>userA</td>
+                <td>김씨</td>
+                <td>010-1234-5678</td>
+                <td>2</td>
+                <td>1</td>
+            </tr>
+
+            <tr>
+                <td>userB</td>
+                <td>이씨</td>
+                <td>010-1234-1234</td>
+                <td>3</td>
+                <td>2</td>
+            </tr>
+
+            <tr>
+                <td>userC</td>
+                <td>박씨</td>
+                <td>010-5678-5678</td>
+                <td>4</td>
+                <td>3</td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>
