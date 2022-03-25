@@ -2,12 +2,15 @@ package com.example.library.controller;
 
 import com.example.library.domain.Book;
 import com.example.library.domain.BookKind;
+import com.example.library.dto.BookSearchDto;
 import com.example.library.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -19,28 +22,19 @@ public class BookController {
 
     // 도서 전체 조회
     @GetMapping
-    public String findBookList(Model model, @RequestParam(required = false) String bookName, @RequestParam(required = false) String bookAuthor) {
-        // 일단 bookName, bookAuthor 조회 기능 제외
-        List<Book> books = bookService.findBooks();
+    public String findBookList(@ModelAttribute BookSearchDto bsDto, Model model) {
+        List<Book> books;
+        // 처음 페이지 요청시
+        if(bsDto.getBookName() == null && bsDto.getBookAuthor() == null) {
+            books = bookService.findBooks();
+        }
+        // 폼 요청시
+        else {
+            books = bookService.searchBookList(bsDto.getBookName(), bsDto.getBookAuthor());
+        }
+
         model.addAttribute("books", books);
+        model.addAttribute("bsDto", bsDto);
         return "book/bookList";
     }
-
-    // 도서 등록
-    @GetMapping("/add")
-    public String addForm() {
-        return "admin/addBookForm";
-    }
-
-    @PostMapping("/add")
-    public String add(@ModelAttribute Book book, @ModelAttribute BookKind bookKind) {
-        bookService.register(book, bookKind);
-        return "redirect:/books/add";
-    }
-
-    // 도서 수정
-    // 일단 제외
-
-    // 도서 삭제
-    // => 조건 체크가 조금 복잡해서 일단 구현X
 }

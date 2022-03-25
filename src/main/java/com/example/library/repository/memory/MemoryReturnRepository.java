@@ -1,6 +1,7 @@
-package com.example.library.repository;
+package com.example.library.repository.memory;
 
 import com.example.library.domain.Return;
+import com.example.library.repository.ReturnRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
@@ -18,8 +19,11 @@ public class MemoryReturnRepository implements ReturnRepository {
         returnStore.put(returnObj.getReturnId(), returnObj);
     }
 
+    //양방향 연관관계 매핑으로 의미X
     @Override
     public List<Return> findById(String userId) {
-        return returnStore.values().stream().filter(returnObj -> returnObj.getUserId().equals(userId)).collect(Collectors.toList());
+        return returnStore.values().stream()
+                .filter(returnObj -> returnObj.getUser().getUserId().equals(userId))
+                .collect(Collectors.toList());
     }
 }

@@ -4,20 +4,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-//@Entity
+@Entity
 @NoArgsConstructor
 @Getter @Setter
 public class Admin {
 
     @Id
+    @Column(name = "ADMIN_ID")
     private String adminId;
-    private String adminPwd;
 
-    public Admin(String adminId, String adminPwd) {
-        this.adminId = adminId;
-        this.adminPwd = adminPwd;
-    }
+    private String adminPwd;
 }

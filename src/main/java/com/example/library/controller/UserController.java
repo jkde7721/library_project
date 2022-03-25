@@ -14,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 //@RestController
@@ -42,7 +44,7 @@ public class UserController {
     }
 
     @PostMapping("/join")
-    public String join(RedirectAttributes redirectAttributes, @ModelAttribute User user) {
+    public String join(@ModelAttribute User user, RedirectAttributes redirectAttributes) {
         userService.join(user);
         redirectAttributes.addAttribute("join", true);
         return "redirect:/users/login";
@@ -57,7 +59,7 @@ public class UserController {
     @PostMapping("/login")
     public String login(@ModelAttribute UserLoginDto userLoginDto) {
         // 로그인 처리
-        userService.login(userLoginDto);
+        boolean isLogin = userService.login(userLoginDto);
         return "redirect:/users"; 
     }
 

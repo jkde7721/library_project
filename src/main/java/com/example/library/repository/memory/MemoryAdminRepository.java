@@ -1,6 +1,7 @@
-package com.example.library.repository;
+package com.example.library.repository.memory;
 
 import com.example.library.domain.Admin;
+import com.example.library.repository.AdminRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
@@ -15,6 +16,11 @@ public class MemoryAdminRepository implements AdminRepository {
     public String save(Admin admin) {
         adminStore.put(admin.getAdminId(), admin);
         return admin.getAdminId();
+    }
+
+    @Override
+    public Admin findById(String adminId) {
+        return adminStore.get(adminId);
     }
 
     @Override

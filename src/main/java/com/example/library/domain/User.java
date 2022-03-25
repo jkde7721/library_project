@@ -3,40 +3,46 @@ package com.example.library.domain;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
 
-//@Entity
+@Entity
 @NoArgsConstructor
 @Getter @Setter
 public class User {
 
     @Id
+    @Column(name = "USER_ID")
     private String userId;
+
     private String userLongPwd;
     private char[] userShortPwd;
     private int suspenTerm;
     private String userTel;
     private String userName;
 
-    public User(String userId, String userLongPwd, char[] userShortPwd, String userTel, String userName) {
-        this.userId = userId;
-        this.userLongPwd = userLongPwd;
-        this.userShortPwd = userShortPwd;
-        this.suspenTerm = 0;
-        this.userTel = userTel;
-        this.userName = userName;
+    //양방향 연관관계
+    //대출내역
+    @OneToMany(mappedBy = "user")
+    private List<Borrow> borrows = new ArrayList<>();
+
+    //반납내역
+    @OneToMany(mappedBy = "user")
+    private List<Return> returns = new ArrayList<>();
+
+    //연관관계 편의 메서드
+    public void addBorrowList(Borrow borrowObj) {
+        borrows.add(borrowObj);
+        borrowObj.setUser(this);
     }
 
-    // 전화번호 없는 경우
-    public User(String userId, String userLongPwd, char[] userShortPwd, String userName) {
-        this.userId = userId;
-        this.userLongPwd = userLongPwd;
-        this.userShortPwd = userShortPwd;
-        this.suspenTerm = 0;
-        this.userName = userName;
+    public void addReturnList(Return returnObj) {
+        returns.add(returnObj);
+        returnObj.setUser(this);
     }
 }

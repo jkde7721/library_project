@@ -4,32 +4,33 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
-//@Entity
+@Entity
 @NoArgsConstructor
 @Getter @Setter
 public class Borrow {
 
-    @Id
-    private Long bookId;
-    private String userId;
-    private String adminId;
+    @Id @GeneratedValue
+    @Column(name = "BORROW_ID")
+    private Long borrowId;
+
+    @OneToOne
+    @JoinColumn(name = "BOOK_ID")
+    private Book book;
+
+    //연관관계 주인
+    @ManyToOne
+    @JoinColumn(name = "USER_ID")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "ADMIN_ID")
+    private Admin admin;
+
     private LocalDate borrowDay;
     private LocalDate expecReturnDay;
     private int overdueDay;
     private int delayTimes;
-
-    private Book book;
-
-    // 생성자 내부에서 borrowDay, expecReturnDay 필드값을 초기화해야 하나?
-    public Borrow(Long bookId, String userId, String adminId) {
-        this.bookId = bookId;
-        this.userId = userId;
-        this.adminId = adminId;
-        this.overdueDay = 0;
-        this.delayTimes = 0;
-    }
 }

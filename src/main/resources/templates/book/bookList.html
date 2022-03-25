@@ -5,13 +5,13 @@
     <title>Title</title>
 </head>
 <body>
-    <h2><a href="home.html" th:href="@{/users}">Home</a></h2> <!-- 이전 요청 페이지가 어떤지에 따라 고치기 -->
+    <h2><a href="../user/home.html" th:href="@{/users}">Home</a></h2> <!-- 이전 요청 페이지가 어떤지에 따라 고치기 -->
 
-    <form action="bookList.html" th:action method="get">
+    <form action="bookList.html" th:action method="get" th:object="${bsDto}">
         <label for="bookName">도서명</label>
-        <input type="text" id="bookName" name="bookName"><br>
+        <input type="text" id="bookName" th:field="*{bookName}"><br>
         <label for="bookAuthor">저자</label>
-        <input type="text" id="bookAuthor" name="bookAuthor">
+        <input type="text" id="bookAuthor" th:field="*{bookAuthor}">
         <br>
         <button type="submit">검색</button> <!-- 검색 요청한 폼 값 유지되어야 함 -->
     </form>
@@ -19,7 +19,7 @@
 
     <!-- book 객체 내의 bookKind 필드로 도서에 대한 자세한 정보 접근 -->
     <!-- 청구기호, 도서명, 저자, 출판사, 발행년, 현재 대출가능여부 -->
-    <table>
+    <table border="1">
         <thead>
         <tr>
             <td>도서번호</td>

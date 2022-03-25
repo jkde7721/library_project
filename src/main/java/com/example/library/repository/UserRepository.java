@@ -3,7 +3,6 @@ package com.example.library.repository;
 import com.example.library.domain.User;
 import com.example.library.dto.UserLoginDto;
 import com.example.library.dto.UserUpdateDto;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 

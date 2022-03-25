@@ -1,13 +1,12 @@
 package com.example.library.controller;
 
 import com.example.library.domain.Admin;
+import com.example.library.domain.Book;
+import com.example.library.domain.BookKind;
 import com.example.library.domain.User;
 import com.example.library.dto.BorrowDto;
 import com.example.library.dto.ReturnDto;
-import com.example.library.service.AdminService;
-import com.example.library.service.BorrowService;
-import com.example.library.service.ReturnService;
-import com.example.library.service.UserService;
+import com.example.library.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +21,7 @@ public class AdminController {
 
     private final AdminService adminService;
     private final UserService userService;
+    private final BookService bookService;
     private final BorrowService borrowService;
     private final ReturnService returnService;
 
@@ -100,4 +100,26 @@ public class AdminController {
         returnService.processReturn(returnDto);
         return "redirect:/security/return"; // 다시 반납 처리 폼으로
     }
+
+    // 도서 등록
+    // 청구기호로 도서 검색 후, 폼에 자동 입력
+    @GetMapping("/add")
+    public String addForm(@RequestParam(required = false) String bookSymbol , Model model) {
+        BookKind bookKind = bookService.findBookKind(bookSymbol); // 청구기호로 기존의 BookKind 객체 찾음 (빈 객체일 수 있음)
+        bookKind.setBookSymbol(bookSymbol); // 빈 객체인 경우 청구기호 set
+        model.addAttribute("bookKind", bookKind);
+        return "admin/addBookForm";
+    }
+
+    @PostMapping("/add")
+    public String add(@ModelAttribute Book book, @ModelAttribute BookKind bookKind) {
+        bookService.register(book, bookKind);
+        return "redirect:/security/add";
+    }
+
+    // 도서 수정
+    // 일단 제외
+
+    // 도서 삭제
+    // => 조건 체크가 조금 복잡해서 일단 구현X
 }

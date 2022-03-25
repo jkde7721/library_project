@@ -14,16 +14,14 @@
         </select>
         <!-- 위의 선택된 값에 따라 name 속성이 userId 혹은 userName -->
         <input th:if="${isId}" type="text" name="userId">
-        <input th:if="${!isId}" type="text" name="userName">
-
-        <br>
-        <button type="submit">검색</button>
+        <input th:if="${!isId}" type="text" name="userName">&nbsp;
+        <button type="submit">검색</button><br>
     </form>
     <br>
 
     <!-- 아이디, 이름, 전화번호, 대출 가능 권수, 대출 불가 기간 -->
     <!-- 파라미터로 전달되는 userId 혹은 userName에 따라 데이터 검색 -->
-    <table>
+    <table border="1">
         <thead>
             <tr>
                 <td>아이디</td>

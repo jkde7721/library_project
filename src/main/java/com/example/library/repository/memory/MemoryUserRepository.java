@@ -1,8 +1,9 @@
-package com.example.library.repository;
+package com.example.library.repository.memory;
 
 import com.example.library.domain.User;
 import com.example.library.dto.UserLoginDto;
 import com.example.library.dto.UserUpdateDto;
+import com.example.library.repository.UserRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

@@ -7,17 +7,26 @@
 <body>
     <h2><a href="home.html" th:href="@{/security}">Home</a></h2>
 
-    <form action="home.html" th:action method="post">
+    <form action="home.html" th:action="@{/security/add}" method="get">
+        <label for="bookSymbolSearch">청구기호 검색</label>
+        <input id="bookSymbolSearch" name="bookSymbol">&nbsp;
+        <button>검색</button> <!-- 기존에 등록되어 있는 도서인지 청구기호로 검색 후, 폼에 해당 정보 업데이트 -->
+    </form>
+
+    <br>
+    <hr>
+
+    <form action="home.html" th:action="@{/security/add}" method="post" th:object="${bookKind}">
         <label for="bookSymbol">청구기호</label>
-        <input type="text" id="bookSymbol" name="bookSymbol"><br>
+        <input type="text" id="bookSymbol" th:field="*{bookSymbol}"><br>
         <label for="bookName">도서명</label>
-        <input type="text" id="bookName" name="bookName"><br>
+        <input type="text" id="bookName" th:field="*{bookName}"><br>
         <label for="bookAuthor">저자</label>
-        <input type="text" id="bookAuthor" name="bookAuthor"><br>
+        <input type="text" id="bookAuthor" th:field="*{bookAuthor}"><br>
         <label for="bookPublisher">출판사</label>
-        <input type="text" id="bookPublisher" name="bookPublisher"><br>
+        <input type="text" id="bookPublisher" th:field="*{bookPublisher}"><br>
         <label for="bookPubYear">발행년</label>
-        <input type="number" id="bookPubYear" name="bookPubYear"><br>
+        <input type="number" id="bookPubYear" th:field="*{bookPubYear}"><br>
         <br>
         <button type="submit">등록</button>
         <button type="button" onclick="location.href='home.html'" th:onclick="|location.href='@{/security}'|">취소</button>

@@ -1,6 +1,7 @@
-package com.example.library.repository;
+package com.example.library.repository.memory;
 
 import com.example.library.domain.Borrow;
+import com.example.library.repository.BorrowRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
@@ -15,17 +16,20 @@ public class MemoryBorrowRepository implements BorrowRepository {
 
     @Override
     public void save(Borrow borrowObj) {
-        borrowStore.put(borrowObj.getBookId(), borrowObj);
+        borrowStore.put(borrowObj.getBook().getBookId(), borrowObj);
     }
 
+    //양방향 연관관계 매핑으로 의미X
     @Override
     public List<Borrow> findById(String userId) {
-        return borrowStore.values().stream().filter(borrowObj -> borrowObj.getUserId().equals(userId)).collect(Collectors.toList());
+        return borrowStore.values().stream()
+                .filter(borrowObj -> borrowObj.getUser().getUserId().equals(userId))
+                .collect(Collectors.toList());
     }
 
     @Override
     public String delete(Long bookId) {
-        String userId = borrowStore.get(bookId).getUserId(); // 대출한 이용자 번호 get
+        String userId = borrowStore.get(bookId).getUser().getUserId(); // 대출한 이용자 번호 get
         borrowStore.remove(bookId); // 튜플 삭제
         return userId;
     }
