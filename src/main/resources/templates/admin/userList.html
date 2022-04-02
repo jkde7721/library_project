@@ -36,8 +36,8 @@
                 <td th:text="${user.userId}">userA</td>
                 <td th:text="${user.userName}">김씨</td>
                 <td th:text="${user.userTel}">010-1234-5678</td>
-                <td>2</td> <!-- 너는 따로 로직 추가해서 넘겨줌 -->
-                <td th:text="${user.suspenTerm}">1</td>
+                <td th:text="${5 - user.borrows.size()}">2</td> <!-- 너는 따로 로직 추가해서 넘겨줌 -->
+                <td th:text="${user.suspendedTerm}">1</td>
             </tr>
         </tbody>
     </table>

@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface ReturnRepository {
 
-    void save(Return returnObj);
-    List<Return> findById(String userId);
+    Long save(Return returnObj);
+    List<Return> findByUserId(String userId);
 }

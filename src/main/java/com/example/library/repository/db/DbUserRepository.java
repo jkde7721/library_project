@@ -5,78 +5,74 @@ import com.example.library.dto.UserLoginDto;
 import com.example.library.dto.UserUpdateDto;
 import com.example.library.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
-import java.util.ArrayList;
+import javax.persistence.NoResultException;
 import java.util.List;
 
 @RequiredArgsConstructor
 @Repository
-@Primary
 public class DbUserRepository implements UserRepository {
 
     private final EntityManager em;
 
     @Override
-    public String save(User user) {
-        EntityTransaction tx = em.getTransaction();
-        tx.begin();
-        try {
-            em.persist(user);
-            tx.commit();
-        } catch (Exception e) {
-            tx.rollback();
-        } finally {
-            em.close();
-        }
-        return user.getUserId();
+    public Long save(User user) {
+        em.persist(user);
+        return user.getUserSeq();
     }
 
     @Override
     public boolean compareByIdAndPwd(UserLoginDto userLoginDto) {
-        User user = em.find(User.class, userLoginDto.getUserId());
-        return (user.getUserLongPwd().equals(userLoginDto.getUserLongPwd()));
+        List<User> resultList = em.createQuery("select u from User u where u.userId = :userId and u.userPwd = :userPwd", User.class)
+                .setParameter("userId", userLoginDto.getUserId())
+                .setParameter("userPwd", userLoginDto.getUserPwd())
+                .getResultList();
+        if(resultList.size() == 0) return false;
+        return true;
+    }
+
+    @Override
+    public User findBySeq(Long userSeq) {
+        return em.find(User.class, userSeq);
     }
 
     @Override
     public List<User> findById(String userId) {
-        User user = em.find(User.class, userId);
-        List<User> users = new ArrayList<>();
-        users.add(user);
+        List<User> users = em.createQuery("select u from User u where u.userId = :userId", User.class)
+                .setParameter("userId", userId)
+                .getResultList();
         return users;
     }
 
-    //JPQL 사용
     @Override
     public List<User> findByName(String userName) {
-        return null;
+        List<User> users = em.createQuery("select u from User u where u.userName = :userName", User.class)
+                .setParameter("userName", userName)
+                .getResultList();
+        return users;
     }
 
     @Override
     public List<User> findAll() {
-        List<User> users = em.createQuery("select u from User u", User.class).getResultList();
-        return users;
+        return em.createQuery("select u from User u", User.class).getResultList();
     }
 
     @Override
-    public void updateValue(String userId, UserUpdateDto userUpdateDto) {
-        EntityTransaction tx = em.getTransaction();
-        tx.begin();
+    public Long updateValue(String userId, UserUpdateDto userUpdateDto) {
+        //벌크연산 필요 없음 -> 엔티티 하나에 대해서만 update
         try {
-            User user = em.find(User.class, userId);
-            user.setUserLongPwd(userUpdateDto.getUserLongPwd());
-            user.setUserShortPwd(userUpdateDto.getUserShortPwd());
-            user.setUserName(userUpdateDto.getUserName());
-            user.setUserTel(userUpdateDto.getUserTel());
-
-            tx.commit();
-        } catch (Exception e) {
-            tx.rollback();
-        } finally {
-            em.close();
+            User findUser = em.createQuery("select u from User u where u.userId = :userId", User.class)
+                    .setParameter("userId", userId)
+                    .getSingleResult();
+            findUser.setUserPwd(userUpdateDto.getUserPwd());
+            findUser.setUserShortPwd(userUpdateDto.getUserShortPwd());
+            findUser.setUserName(userUpdateDto.getUserName());
+            findUser.setUserTel(userUpdateDto.getUserTel());
+            return findUser.getUserSeq();
+        } catch (NoResultException e) {
+            return -1L;
         }
     }
 }

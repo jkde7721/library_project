@@ -9,8 +9,8 @@
 
     <form action="user.html" th:action method="post">
         <!-- 현재 비밀번호 확인 후, 일치하면 비밀번호 변경 -->
-        <label for="userLongPwd">비밀번호</label>
-        <input type="text" id="userLongPwd" name="userLongPwd" value="abcd1234" th:value="${user.userLongPwd}"><br>
+        <label for="userPwd">비밀번호</label>
+        <input type="text" id="userPwd" name="userPwd" value="abcd1234" th:value="${user.userPwd}"><br>
         <label for="userShortPwd">대출용 비밀번호</label>
         <input type="text" id="userShortPwd" name="userShortPwd" value="1234" th:value="${user.userShortPwd}"><br>
         <label for="userName">이름</label>

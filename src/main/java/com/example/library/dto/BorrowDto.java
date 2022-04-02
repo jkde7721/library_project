@@ -6,13 +6,13 @@ import lombok.Setter;
 @Getter @Setter
 public class BorrowDto {
 
-    private String userId;
     private Long bookId;
+    private String userId;
     private String adminId;
 
-    public BorrowDto(String userId, Long bookId, String adminId) {
-        this.userId = userId;
+    public BorrowDto(Long bookId, String userId, String adminId) {
         this.bookId = bookId;
+        this.userId = userId;
         this.adminId = adminId;
     }
 }

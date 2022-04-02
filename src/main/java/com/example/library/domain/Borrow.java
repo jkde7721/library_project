@@ -8,11 +8,14 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@SequenceGenerator(
+        name = "BORROW_SEQ_GENERATOR",
+        sequenceName = "BORROW_SEQ")
 @NoArgsConstructor
 @Getter @Setter
 public class Borrow {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BORROW_SEQ_GENERATOR")
     @Column(name = "BORROW_ID")
     private Long borrowId;
 
@@ -22,15 +25,22 @@ public class Borrow {
 
     //연관관계 주인
     @ManyToOne
-    @JoinColumn(name = "USER_ID")
+    @JoinColumn(name = "USER_SEQ")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "ADMIN_ID")
+    @JoinColumn(name = "ADMIN_SEQ")
     private Admin admin;
 
+    @Column(name = "BORROW_DAY")
     private LocalDate borrowDay;
-    private LocalDate expecReturnDay;
+
+    @Column(name = "EXPECTED_RETURN_DAY")
+    private LocalDate expectedReturnDay;
+
+    @Column(name = "OVERDUE_DAY")
     private int overdueDay;
+
+    @Column(name = "DELAY_TIMES")
     private int delayTimes;
 }

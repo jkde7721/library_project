@@ -25,16 +25,18 @@
         </thead>
         <tbody>
             <tr th:each="borrowObj : ${borrowList}">
-                <td th:text="${borrowObj.bookId}">12345</td>
+                <th:block th:object="${borrowObj.book}">
+                    <td th:text="*{bookId}">12345</td>
+                    <td th:text="|*{bookKind.bookSymbol} c*{bookCopy}|">100.김</td>
+                </th:block>
                 <th:block th:object="${borrowObj.book.bookKind}">
-                    <td th:text="*{bookSymbol}">100.김</td>
                     <td th:text="*{bookName}">spring boot</td>
                     <td th:text="*{bookAuthor}">Ethan</td>
                     <td th:text="*{bookPublisher}">인프런</td>
                     <td th:text="*{bookPubYear}">2022</td>
                 </th:block>
                 <td th:text="${borrowObj.borrowDay}">2022.01.01</td>
-                <td th:text="${borrowObj.expecReturnDay}">2022.01.15</td>
+                <td th:text="${borrowObj.expectedReturnDay}">2022.01.15</td>
                 <td th:text="${borrowObj.overdueDay}">0</td>
                 <td>
                     <button th:if="${borrowObj.delayTimes == 0}" type="button" onclick="" th:onclick="">연기</button> <!-- 어디서 delayTimes의 값을 +1 하지? -->

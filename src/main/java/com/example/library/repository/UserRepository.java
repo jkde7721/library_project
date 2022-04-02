@@ -8,10 +8,11 @@ import java.util.List;
 
 public interface UserRepository {
 
-    String save(User user);
+    Long save(User user);
     boolean compareByIdAndPwd(UserLoginDto userLoginDto);
+    User findBySeq(Long userSeq);
     List<User> findById(String userId);
     List<User> findByName(String userName);
     List<User> findAll();
-    void updateValue(String userId, UserUpdateDto userUpdateDto);
+    Long updateValue(String userId, UserUpdateDto userUpdateDto);
 }

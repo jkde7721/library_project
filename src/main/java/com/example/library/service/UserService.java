@@ -6,18 +6,21 @@ import com.example.library.dto.UserUpdateDto;
 import com.example.library.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class UserService {
 
     private final UserRepository userRepository;
 
-    public String join(User user) {
+    @Transactional
+    public Long join(User user) {
         userRepository.save(user);
-        return user.getUserId();
+        return user.getUserSeq();
     }
 
     public boolean login(UserLoginDto userLoginDto) {
@@ -36,6 +39,7 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    @Transactional
     public void updateUser(String userId, UserUpdateDto userUpdateDto) {
         userRepository.updateValue(userId, userUpdateDto);
     }

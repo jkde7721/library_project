@@ -7,10 +7,10 @@ import lombok.Setter;
 public class UserLoginDto {
 
     private String userId;
-    private String userLongPwd;
+    private String userPwd;
 
-    public UserLoginDto(String userId, String userLongPwd) {
+    public UserLoginDto(String userId, String userPwd) {
         this.userId = userId;
-        this.userLongPwd = userLongPwd;
+        this.userPwd = userPwd;
     }
 }

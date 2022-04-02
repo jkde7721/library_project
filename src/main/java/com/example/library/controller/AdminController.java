@@ -4,6 +4,7 @@ import com.example.library.domain.Admin;
 import com.example.library.domain.Book;
 import com.example.library.domain.BookKind;
 import com.example.library.domain.User;
+import com.example.library.dto.AdminLoginDto;
 import com.example.library.dto.BorrowDto;
 import com.example.library.dto.ReturnDto;
 import com.example.library.service.*;
@@ -51,9 +52,9 @@ public class AdminController {
     }
 
     @PostMapping("/login")
-    public String login(@ModelAttribute Admin admin) {
+    public String login(@ModelAttribute AdminLoginDto adminLoginDto) {
         // 로그인 처리 로직
-        boolean isLogin = adminService.login(admin); // 로그인 성공여부 파라미터로 전달?
+        boolean isLogin = adminService.login(adminLoginDto); // 로그인 성공여부 파라미터로 전달?
         return "redirect:/security";
     }
 

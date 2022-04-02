@@ -11,12 +11,14 @@ import com.example.library.repository.BorrowRepository;
 import com.example.library.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class BorrowService {
 
     private final BorrowRepository borrowRepository;
@@ -24,11 +26,12 @@ public class BorrowService {
     private final UserRepository userRepository;
     private final AdminRepository adminRepository;
 
+    @Transactional
     public void processBorrow(BorrowDto borrowDto) {
         Borrow borrowObj = new Borrow();
         // 도서번호, 이용자 아이디, 관리자 아이디, 대출일, 반납예정일, 연체일수, 연기회수
         borrowObj.setBorrowDay(LocalDate.now());
-        borrowObj.setExpecReturnDay(LocalDate.now().plusDays(14));
+        borrowObj.setExpectedReturnDay(LocalDate.now().plusDays(14));
         borrowObj.setOverdueDay(0);
         borrowObj.setDelayTimes(0);
 
@@ -44,6 +47,6 @@ public class BorrowService {
     }
 
     public List<Borrow> findBorrowListByUserId(String userId) {
-        return borrowRepository.findById(userId);
+        return borrowRepository.findByUserId(userId);
     }
 }

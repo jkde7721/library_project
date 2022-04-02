@@ -3,52 +3,47 @@ package com.example.library.repository.db;
 import com.example.library.domain.Borrow;
 import com.example.library.repository.BorrowRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 import java.util.List;
 
 @RequiredArgsConstructor
 @Repository
-@Primary
 public class DbBorrowRepository implements BorrowRepository {
 
-    private final EntityManager em;
+    public final EntityManager em;
 
     @Override
-    public void save(Borrow borrowObj) {
-        EntityTransaction tx = em.getTransaction();
-        tx.begin();
-        try {
-            em.persist(borrowObj);
-            tx.commit();
-        } catch (Exception e) {
-            tx.rollback();
-        } finally {
-            em.close();
-        }
-    }
-
-    //양방향 연관관계 매핑으로 의미X
-    @Override
-    public List<Borrow> findById(String userId) {
-        return null;
+    public Long save(Borrow borrowObj) {
+        em.persist(borrowObj);
+        return borrowObj.getBorrowId();
     }
 
     @Override
-    public String delete(Long bookId) {
-        EntityTransaction tx = em.getTransaction();
-        tx.begin();
+    public List<Borrow> findByUserId(String userId) {
+        List<Borrow> borrows = em.createQuery("select br from Borrow br join User u on u.userId = :userId", Borrow.class)
+                .setParameter("userId", userId)
+                .getResultList();
+        return borrows;
+    }
+
+    /**
+     * @param bookId
+     * @return userSeq
+     */
+    @Override
+    public Long delete(Long bookId) {
         try {
-            //JPQL 사용
-            tx.commit();
-        } catch (Exception e) {
-            tx.rollback();
-        } finally {
-            em.close();
+            Borrow findBorrow = em.createQuery("select br from Borrow br join fetch br.user where exists(select b from br join br.book b where b.bookId = :bookId)", Borrow.class)
+                    .setParameter("bookId", bookId)
+                    .getSingleResult();
+            Long userSeq = findBorrow.getUser().getUserSeq();
+            em.remove(findBorrow); //delete query
+            return userSeq; //이용자 일련번호 반환
+        } catch(NoResultException e) {
+            return -1L;
         }
-        return "";
     }
 }

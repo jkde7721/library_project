@@ -22,9 +22,11 @@
         </thead>
         <tbody>
         <tr th:each="returnObj : ${returnList}">
-            <td th:text="${returnObj.bookId}">12345</td>
+            <th:block th:object="${returnObj.book}">
+                <td th:text="*{bookId}">12345</td>
+                <td th:text="|*{bookKind.bookSymbol} c*{bookCopy}|">100.김</td>
+            </th:block>
             <th:block th:object="${returnObj.book.bookKind}">
-                <td th:text="*{bookSymbol}">100.김</td>
                 <td th:text="*{bookName}">spring boot</td>
                 <td th:text="*{bookAuthor}">Ethan</td>
                 <td th:text="*{bookPublisher}">인프런</td>

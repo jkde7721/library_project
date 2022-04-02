@@ -34,7 +34,7 @@
         <tbody>
         <tr th:each="book : ${books}">
             <td th:text="${book.bookId}">1</td>
-            <td th:text="|${book.bookSymbol} c${book.bookCopy}|">100.김</td>
+            <td th:text="|${book.bookKind.bookSymbol} c${book.bookCopy}|">100.김</td>
             <th:block th:object="${book.bookKind}">
                 <td th:text="*{bookName}">Spring Boot</td>
                 <td th:text="*{bookAuthor}">김영한</td>

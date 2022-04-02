@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface BorrowRepository {
 
-    void save(Borrow borrowObj);
-    List<Borrow> findById(String userId);
-    String delete(Long bookId);
+    Long save(Borrow borrowObj);
+    List<Borrow> findByUserId(String userId);
+    Long delete(Long bookId); //userSeq 반환
 }

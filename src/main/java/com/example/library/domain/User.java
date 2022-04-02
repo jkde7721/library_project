@@ -4,25 +4,32 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@SequenceGenerator(
+        name = "USER_SEQ_GENERATOR",
+        sequenceName = "USER_SEQ")
 @NoArgsConstructor
 @Getter @Setter
 public class User {
 
-    @Id
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_SEQ_GENERATOR")
+    @Column(name = "USER_SEQ")
+    private Long userSeq;
+
     @Column(name = "USER_ID")
     private String userId;
 
-    private String userLongPwd;
-    private char[] userShortPwd;
-    private int suspenTerm;
+    @Column(name = "USER_PWD")
+    private String userPwd;
+
+    @Column(name = "USER_SHORT_PWD", length = 4)
+    private String userShortPwd; // '0000'의 경우때문에 String
+
+    private int suspendedTerm;
     private String userTel;
     private String userName;
 
